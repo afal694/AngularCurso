@@ -1,13 +1,36 @@
 <div class="container alig-items-center">
-  <div class="card text-center">
-    <div class="card-header">
-      <h4>{{title}}</h4>
-    </div>
-    <div class="card-content">
-      <p class="text-info">
-        <!-- <app-destino-hoteles></app-destino-hoteles> -->
-        <app-lista-destinos></app-lista-destinos>
-      </p>
+  
+  <div class="page-header">
+    <div class="container">
+      <h1>Ruteo simple</h1>
+      <!-- <div class="navLinks">
+        <a [routerLink]="['/home']">Home</a>
+        <a [routerLink]="['/destino']">Destino</a>
+
+      </div> -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand">Brand</a>
+        <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="my-nav" class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" [routerLink]="['/home']">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" [routerLink]="['/destino']">Destino <span class="sr-only"></span></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </div>
   </div>
+  
+  <div class="row">
+    <h4 class="text-info">{{title}}</h4>
+  </div>
+
+  <router-outlet></router-outlet>
+
 </div>

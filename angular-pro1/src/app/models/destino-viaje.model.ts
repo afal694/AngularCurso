@@ -3,7 +3,7 @@ export class DestinoViaje {
   public servicios: string[];
 
   constructor(public nombre: string , public u: string){ 
-    this.servicios = ['pileta','desayuno'];
+    this.servicios = ['pileta','desayuno','Restaurante','Coctel'];
   }
 
   isSelected(): boolean{

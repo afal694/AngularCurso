@@ -3,30 +3,37 @@
 </p> -->
 
 
-<div class="card-content">
+<div class="card border-info" style="margin-bottom: 10px;">
 	<div class="card-img">
 		<img src="https://placeimg.com/380/230/nature" alt="">
 		<span>
 			<h4>{{position}}</h4>
 		</span>
 	</div>
-	<div class="card-desc">
-		<h3>{{destino.nombre}}</h3>
+	<div class="card-body">
+		<h5 class="card-title">{{destino.nombre}}</h5>
 		<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, voluptatum! Dolorquo, perspiciatis
 			voluptas totam</p>
 		<p>Servicios</p>
 		<ul>
 			<li *ngFor="let s of destino.servicios">
 				<span [ngSwitch]="s">
-					<i *ngSwitchCase="'desayuno'" style="color:blue">{{s}}</i>
-					<i *ngSwitchDefault>{{s}}</i>	
+					<i *ngSwitchCase="'desayuno'" class="text-success">{{s}}</i>
+					<i *ngSwitchDefault class="text-info">{{s}}
+					</i>	
 				</span>
 			</li>
 		</ul>
-		<a href="#" class="btn-card" (click)="ir()">ir!</a>
-<!-- 		<span [style.display]="destino.isSelected() ? '' : 'none'"> - PREFERIDO - </span> -->
-		<span *ngIf="destino.isSelected()"> 
-			<span ngNonBindable> - PREFERIDO - </span>
-		</span>
+
+		<div class="text-center">
+			<a href="#" class="btn-card" (click)="ir()" style=" margin-bottom: 200px;">ir!</a>
+			<!-- 		<span [style.display]="destino.isSelected() ? '' : 'none'"> - PREFERIDO - </span> -->
+					<span *ngIf="destino.isSelected()"> 
+						<span ngNonBindable class="text-secondary"> - PREFERIDO - </span>
+					</span>
+		</div>
+	</div>
+	<div class="card-footer">
+		<a type="button" class="btn btn-info" [routerLink]="['/destino']">Detalles de destino</a>
 	</div>
 </div>
