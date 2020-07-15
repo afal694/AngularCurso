@@ -31,6 +31,10 @@
 	</div>
 	<hr class="mb-5">
 	<div class="row">
-		<app-destino-hoteles *ngFor="let d of destinos" [destino]="d" (clicked)="elegido($event)"></app-destino-hoteles>
+		<app-destino-hoteles *ngFor="let d of destinos; let i=index" 
+		[destino]="d"
+		[idx]="i+1" 
+		(clicked)="elegido($event)"
+		></app-destino-hoteles>
 	</div>
 </div>
