@@ -13,14 +13,16 @@ export class FormDestinoComponent implements OnInit {
   fg: FormGroup;
    
   constructor(private fb: FormBuilder) {
-
-   
+    this.onItemAdded = new EventEmitter(); 
     this.fg = this.fb.group({
       nombre: [''],
       url: ['']
     });
-
-    this.onItemAdded = new EventEmitter();
+    
+    this.fg.valueChanges.subscribe((form: any)=>{
+      console.log(`Cambio en el formulario ${form}`);
+    });
+    
   }
 
   ngOnInit(): void {

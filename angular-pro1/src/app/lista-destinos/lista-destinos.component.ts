@@ -19,11 +19,6 @@ export class ListaDestinosComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // (nombre: string, url: string): boolean{
-  //   this.destinos.push(new DestinoViaje(nombre,url));
-  //   return false;
-  // }
-
   agregado(d: DestinoViaje){
     this.destinos.push(d);
   }
