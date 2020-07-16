@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DestinoViaje } from './../models/destino-viaje.model';
 
 @Component({
@@ -15,12 +15,12 @@ export class FormDestinoComponent implements OnInit {
   constructor(private fb: FormBuilder) {
     this.onItemAdded = new EventEmitter(); 
     this.fg = this.fb.group({
-      nombre: [''],
-      url: ['']
+      nombre: ['',Validators.required],
+      url: ['', Validators.required]
     });
     
     this.fg.valueChanges.subscribe((form: any)=>{
-      console.log(`Cambio en el formulario ${form}`);
+      console.log(`Cambio en el formulario `,form);
     });
     
   }
