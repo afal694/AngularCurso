@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { DestinoViaje } from './../models/destino-viaje.model';
+import { DestinosApiClient } from './../models/destinos-api-client.model';
 
 @Component({
   selector: 'app-lista-destinos',
@@ -9,25 +10,28 @@ import { DestinoViaje } from './../models/destino-viaje.model';
 export class ListaDestinosComponent implements OnInit {
 
   @Input() onItemAdded: EventEmitter<DestinoViaje>;
+  updates: string[];
 
-  destinos: DestinoViaje[];
-
-  constructor() {
-    this.destinos = [];
+  constructor(public destinosApiClient: DestinosApiClient) {
+    this.updates = [];
+    this.destinosApiClient.subscribeOnChange((d: DestinoViaje) => {
+      if (d!= null){
+        this.updates.push('Se ha elegido a '+ d.nombre);
+      }
+    });
   }
 
   ngOnInit(): void {
   }
 
   agregado(d: DestinoViaje){
-    this.destinos.push(d);
+    this.destinosApiClient.add(d);
+    this.onItemAdded.emit(d);
   }
 
   elegido(d: DestinoViaje){
-    this.destinos.forEach(function(x) {
-      x.setSelected(false)
-    });
-    d.setSelected(true);
+    this.destinosApiClient.elegir(d);
+    
   }
 
 }

@@ -9,6 +9,8 @@ import { DestinoHotelesComponent } from './destino-hoteles/destino-hoteles.compo
 import { ListaDestinosComponent } from './lista-destinos/lista-destinos.component';
 import { DestinoDetalleComponent } from './destino-detalle/destino-detalle.component';
 import { FormDestinoComponent } from './form-destino/form-destino.component';
+import { DestinosApiClient } from './models/destinos-api-client.model';
+
 
 
 const routes: Routes = [
@@ -32,7 +34,7 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [DestinosApiClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
