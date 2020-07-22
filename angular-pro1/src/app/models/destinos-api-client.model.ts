@@ -8,7 +8,7 @@ export class DestinosApiClient {
     constructor() {
         this.destinos = [];
     }
-    //Agrega elementos al array destinos
+    //Agrega elemento al array destinos
     add(d: DestinoViaje) {
         this.destinos.push(d);
     }
@@ -29,7 +29,7 @@ export class DestinosApiClient {
         this.current.next(d);//se agrega valor a observable
     }
 
-    //método para subscribir observadores al observable
+    //método para suscribir observadores al observable
     subscribeOnChange(fn){
         this.current.subscribe(fn);
     }

@@ -54,7 +54,12 @@ let reducerInitialState = {
     ReactiveFormsModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    NgRxStoreModule.forRoot(reducers, { initialState: reducerInitialState }),
+    NgRxStoreModule.forRoot(reducers, { initialState: reducerInitialState,
+      runtimeChecks: {
+        strictStateImmutability: false,
+        strictActionImmutability: false
+      }
+    }),
     EffectsModule.forRoot([DestinosViajesEffects]),
     StoreDevtoolsModule.instrument({}) 
   ],

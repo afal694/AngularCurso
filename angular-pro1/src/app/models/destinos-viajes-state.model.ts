@@ -52,7 +52,7 @@ export function ReducerDestinosViajes (
         }
         case DestinosViajeActionTypes.ELEGIDO_FAVORITO: {
             state.items.forEach(x => x.setSelected(false));
-            let fav: DestinoViaje = (action as ElegidoFavoritoAction).destino;
+            const fav: DestinoViaje = (action as ElegidoFavoritoAction).destino;
             fav.setSelected(true);
             return {
                 ...state,

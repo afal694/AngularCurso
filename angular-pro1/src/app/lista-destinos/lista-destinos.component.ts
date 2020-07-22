@@ -33,13 +33,13 @@ export class ListaDestinosComponent implements OnInit {
 
   agregado(d: DestinoViaje){
     this.destinosApiClient.add(d);
-    this.onItemAdded.emit(d);
+    //this.onItemAdded.emit(d);
     this.store.dispatch(new NuevoDestinoAction(d));// redux
   }
 
   elegido(d: DestinoViaje){
     this.destinosApiClient.elegir(d);
-    this.store.dispatch(new ElegidoFavoritoAction(d));// redux
+      this.store.dispatch(new ElegidoFavoritoAction(d));// redux
   }
 
 }
