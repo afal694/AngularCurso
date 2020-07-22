@@ -3,7 +3,7 @@ import { DestinoViaje } from './../models/destino-viaje.model';
 import { DestinosApiClient } from './../models/destinos-api-client.model';
 import { AppState } from '../app.module';
 import { Store } from '@ngrx/store';
-import { ElegidoFavoritoAction, DestinosViajesEffects, DestinosViajeActionTypes, NuevoDestinoAction } from '../models/destinos-viajes-state.model';
+import { ElegidoFavoritoAction, DestinosViajesEffects, DestinosViajeActionTypes, NuevoDestinoAction, EliminarDestino } from '../models/destinos-viajes-state.model';
 
 
 @Component({
@@ -41,7 +41,7 @@ export class ListaDestinosComponent implements OnInit {
       this.store.dispatch(new ElegidoFavoritoAction(d));// redux
   }
 
-  getAll(){
-
+  EliminarDestino(){
+    this.store.dispatch(new EliminarDestino());//redux
   }
 }
