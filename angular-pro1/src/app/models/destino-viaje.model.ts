@@ -21,4 +21,8 @@ export class DestinoViaje {
   voteDown() {
     this.votes--;
   }
+
+  ResetVotes(){
+    this.votes=0;
+  }
 }
