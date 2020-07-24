@@ -1,9 +1,9 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { DestinoViaje } from './../models/destino-viaje.model';
-import { DestinosApiClient } from './../models/destinos-api-client.model';
-import { AppState } from '../app.module';
+import { DestinoViaje } from './../../models/destino-viaje.model';
+import { DestinosApiClient } from './../../models/destinos-api-client.model';
+import { AppState } from '../../app.module';
 import { Store } from '@ngrx/store';
-import { ElegidoFavoritoAction, DestinosViajesEffects, DestinosViajeActionTypes, NuevoDestinoAction, EliminarDestinoAction, ResetVotesAction } from '../models/destinos-viajes-state.model';
+import { ElegidoFavoritoAction, DestinosViajesEffects, DestinosViajeActionTypes, NuevoDestinoAction, EliminarDestinoAction, ResetVotesAction } from '../../models/destinos-viajes-state.model';
 
 
 @Component({

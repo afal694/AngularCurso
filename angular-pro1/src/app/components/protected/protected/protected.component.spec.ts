@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormDestinoViajeComponent } from './form-destino-viaje.component';
+import { ProtectedComponent } from './protected.component';
 
-describe('FormDestinoViajeComponent', () => {
-  let component: FormDestinoViajeComponent;
-  let fixture: ComponentFixture<FormDestinoViajeComponent>;
+describe('ProtectedComponent', () => {
+  let component: ProtectedComponent;
+  let fixture: ComponentFixture<ProtectedComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormDestinoViajeComponent ]
+      declarations: [ ProtectedComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormDestinoViajeComponent);
+    fixture = TestBed.createComponent(ProtectedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
