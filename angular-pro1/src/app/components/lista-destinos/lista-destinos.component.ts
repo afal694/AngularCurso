@@ -10,7 +10,7 @@ import { ElegidoFavoritoAction, DestinosViajesEffects, DestinosViajeActionTypes,
   selector: 'app-lista-destinos',
   templateUrl: './lista-destinos.component.html',
   styleUrls: ['./lista-destinos.component.css'],
-    providers: [DestinosApiClient]
+  providers: [DestinosApiClient]
 })
 export class ListaDestinosComponent implements OnInit {
 

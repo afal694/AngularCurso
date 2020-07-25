@@ -12,7 +12,6 @@ import { DestinoHotelesComponent } from './components/destino-hoteles/destino-ho
 import { ListaDestinosComponent } from './components/lista-destinos/lista-destinos.component';
 import { DestinoDetalleComponent } from './components/destino-detalle/destino-detalle.component';
 import { FormDestinoComponent } from './components/form-destino/form-destino.component';
-import { DestinosApiClient } from './models/destinos-api-client.model';
 import { DestinosViajeState, initializeDestinosViajeState, 
   ReducerDestinosViajes, 
   DestinosViajesEffects} from './models/destinos-viajes-state.model';
@@ -100,7 +99,7 @@ let reducerInitialState = {
     ReservasModule 
   ],
   providers: [
-    DestinosApiClient, AuthService, UsuarioLogueadoGuard
+    AuthService, UsuarioLogueadoGuard
   ],
   bootstrap: [AppComponent]
 })
