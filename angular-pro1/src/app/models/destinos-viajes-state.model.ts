@@ -113,7 +113,7 @@ export function ReducerDestinosViajes (
         }
        case DestinosViajeActionTypes.INIT_MY_DATA: {
            const destinos: string [] = (action as InitMyDataAction).destinos;
-           console.log(destinos);
+           console.log(`InitMyDataAction: ${destinos}`);
            
            return {
                ...state,

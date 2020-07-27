@@ -3,9 +3,10 @@ import { NgModule, Component, InjectionToken, Injectable, APP_INITIALIZER } from
 import { RouterModule, Routes} from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule as NgRxStoreModule, ActionReducerMap, Store } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
+import { EffectsModule, rootEffectsInit } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule, HttpClient, HttpHeaders, HttpRequest } from "@angular/common/http";
+import { Dexie } from "dexie";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,7 @@ import { VuelosMainComponentComponent } from './components/vuelos/vuelos-main-co
 import { VuelosMasInfoComponentComponent } from './components/vuelos/vuelos-mas-info-component/vuelos-mas-info-component.component';
 import { VuelosDetalleComponentComponent } from './components/vuelos/vuelos-detalle-component/vuelos-detalle-component.component';
 import { ReservasModule } from './reservas/reservas.module';
+import { DestinoViaje } from './models/destino-viaje.model';
 
 // app-config
 export interface AppConfig  {
@@ -100,6 +102,25 @@ class AppLoadService {
 
 // fin app init
 
+// dexie db
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MyDataBase extends Dexie {
+  destinos: Dexie.Table<DestinoViaje,number>;
+  constructor (){
+    super('MyDataBase');
+    this.version(1).stores({
+      destinos:'++id, nombre, imagenUrl',
+    });
+  }
+}
+
+export const db = new MyDataBase();
+
+// fin dexie db
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -136,7 +157,8 @@ class AppLoadService {
   providers: [
     AuthService, UsuarioLogueadoGuard,
     { provide: APP_CONFIG, useValue: APP_CONFIG_VALUE},
-    AppLoadService, { provide: APP_INITIALIZER, useFactory: init_app, deps: [AppLoadService], multi: true }
+    AppLoadService, { provide: APP_INITIALIZER, useFactory: init_app, deps: [AppLoadService], multi: true },
+    MyDataBase
   ],
   bootstrap: [AppComponent]
 })
