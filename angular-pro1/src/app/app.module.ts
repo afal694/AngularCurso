@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Component } from '@angular/core';
+import { NgModule, Component, InjectionToken, Injectable, APP_INITIALIZER } from '@angular/core';
 import { RouterModule, Routes} from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { StoreModule as NgRxStoreModule, ActionReducerMap } from '@ngrx/store';
+import { StoreModule as NgRxStoreModule, ActionReducerMap, Store } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { HttpClientModule, HttpClient, HttpHeaders, HttpRequest } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +15,8 @@ import { DestinoDetalleComponent } from './components/destino-detalle/destino-de
 import { FormDestinoComponent } from './components/form-destino/form-destino.component';
 import { DestinosViajeState, initializeDestinosViajeState, 
   ReducerDestinosViajes, 
-  DestinosViajesEffects} from './models/destinos-viajes-state.model';
+  DestinosViajesEffects,
+  InitMyDataAction} from './models/destinos-viajes-state.model';
 import { LoginComponent } from './components/login/login/login.component';
 import { ProtectedComponent } from './components/protected/protected/protected.component';
 import { UsuarioLogueadoGuard } from "./guards/usuario-logueado/usuario-logueado.guard";
@@ -25,8 +27,20 @@ import { VuelosMasInfoComponentComponent } from './components/vuelos/vuelos-mas-
 import { VuelosDetalleComponentComponent } from './components/vuelos/vuelos-detalle-component/vuelos-detalle-component.component';
 import { ReservasModule } from './reservas/reservas.module';
 
+// app-config
+export interface AppConfig  {
+  apiEndPoint: string;
+}
+
+const APP_CONFIG_VALUE: AppConfig = {
+  apiEndPoint: 'http://localhost:3000'
+}
+
+export const APP_CONFIG = new InjectionToken<AppConfig>('app.config');
+// end app-config
 
 
+// init routes
 export const childrenRoutesVuelos: Routes = [
   { path: '', redirectTo: 'main' , pathMatch: 'full'},
   { path: 'main', component: VuelosMainComponentComponent},
@@ -51,6 +65,7 @@ const routes: Routes = [
     children: childrenRoutesVuelos  
   }
 ];
+// end init routes
 
 //redux init
 export interface AppState {
@@ -65,6 +80,25 @@ let reducerInitialState = {
 };
 
 //redux fin init
+
+
+// app init 
+export function init_app (appLoadService: AppLoadService): () => Promise<any> {
+  return () => appLoadService.initializeDestinosViajeState();
+} 
+
+@Injectable()
+class AppLoadService {
+  constructor(private store: Store<AppState>, private http: HttpClient){ }
+  async initializeDestinosViajeState(): Promise<any> {
+    const headers: HttpHeaders = new HttpHeaders({ 'X-API-TOKEN' : 'token-seguridad' });
+    const req = new HttpRequest('GET', APP_CONFIG_VALUE.apiEndPoint + '/my', { headers: headers });
+    const response: any = await this.http.request(req).toPromise();
+    this.store.dispatch(new InitMyDataAction(response.body));
+  }
+}
+
+// fin app init
 
 @NgModule({
   declarations: [
@@ -84,10 +118,8 @@ let reducerInitialState = {
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
     RouterModule.forRoot(routes),
+    HttpClientModule,
     NgRxStoreModule.forRoot(reducers, { initialState: reducerInitialState,
       runtimeChecks: {
         strictStateImmutability: false,
@@ -96,10 +128,15 @@ let reducerInitialState = {
     }),
     EffectsModule.forRoot([DestinosViajesEffects]),
     StoreDevtoolsModule.instrument({}),
-    ReservasModule 
+    ReservasModule, 
+    ReactiveFormsModule,
+    FormsModule,
+    
   ],
   providers: [
-    AuthService, UsuarioLogueadoGuard
+    AuthService, UsuarioLogueadoGuard,
+    { provide: APP_CONFIG, useValue: APP_CONFIG_VALUE},
+    AppLoadService, { provide: APP_INITIALIZER, useFactory: init_app, deps: [AppLoadService], multi: true }
   ],
   bootstrap: [AppComponent]
 })

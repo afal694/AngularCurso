@@ -14,7 +14,6 @@ export class DestinoHotelesComponent implements OnInit {
   @Input('idx') position: number;
   @HostBinding('attr.class') cssClass = 'col-md-4';
   @Output() clicked: EventEmitter<DestinoViaje>;
-  public id: string;
 
   constructor(private store: Store<AppState>) { 
     this.clicked = new EventEmitter();

@@ -36,7 +36,8 @@ export class ListaDestinosComponent implements OnInit {
   }
 
   agregado(d: DestinoViaje){
-    this.store.dispatch(new NuevoDestinoAction(d));// redux
+    //this.store.dispatch(new NuevoDestinoAction(d));// redux
+    this.destinosApiClient.add(d);
   }
 
 

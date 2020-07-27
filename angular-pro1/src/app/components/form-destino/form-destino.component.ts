@@ -1,9 +1,10 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, inject, forwardRef, Inject } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, ValidatorFn } from '@angular/forms';
 import { DestinoViaje } from './../../models/destino-viaje.model';
 import { fromEvent } from 'rxjs';
 import { map,filter,debounceTime,distinctUntilChanged,switchMap } from 'rxjs/operators';
-import { ajax, AjaxResponse } from 'rxjs/ajax';
+import { ajax } from 'rxjs/ajax';
+import { APP_CONFIG, AppConfig } from 'src/app/app.module';
 
 
 @Component({
@@ -19,20 +20,30 @@ export class FormDestinoComponent implements OnInit {
 
   minLong = 5;
    
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, @Inject (forwardRef(() => APP_CONFIG)) private config: AppConfig) {
+    
     this.onItemAdded = new EventEmitter(); 
+
     this.fg = this.fb.group({
       nombre: ['',Validators.compose([
         Validators.required,
         this.Nombrevalidator,
         this.NombreValidatorParametrizable(this.minLong)
       ])],
-      url: ['', Validators.required]
+      url: [''
+      //, Validators.required
+    ]
     });
     
     this.fg.valueChanges.subscribe((form: any)=>{
       console.log(`Cambio en el formulario `,form);
     });
+
+    // this.fg.controls['nombre'].valueChanges.subscribe(
+    //   (value: string) => {
+    //     console.log('nombre cambió:', value);
+    //   }
+    // );
     
   }
 
@@ -43,11 +54,10 @@ export class FormDestinoComponent implements OnInit {
       filter(text => text.length > 2),
       debounceTime(200),
       distinctUntilChanged(),
-      switchMap(() => ajax('/assets/datos.json'))
-    ).subscribe(AjaxResponse => {
-      this.searchResults = AjaxResponse.response;
-      console.log(AjaxResponse.response);
-      
+      switchMap((text: string) => ajax(this.config.apiEndPoint + '/ciudades?q=' +  text))
+    ).subscribe(ajaxResponse => {
+      this.searchResults = ajaxResponse.response;
+      //console.log(AjaxResponse.response);
     }); 
 
   }
