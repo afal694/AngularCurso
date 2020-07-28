@@ -22,5 +22,9 @@ app.post("/my",(req, res, next) => {
     res.json(misDestinos);
 });
 
+app.get("/api/translation",(req,res,next) => res.json([
+    {lang: req.query.lang, key: 'HOLA', value: 'HOLA' + req.query.lang}
+]));
+
 
 //curl -d '["Buenos Aires"]' -H 'Content-type: application/json' http://localhost:3000/my
