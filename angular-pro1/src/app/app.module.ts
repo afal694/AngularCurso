@@ -6,7 +6,7 @@ import { StoreModule as NgRxStoreModule, ActionReducerMap, Store } from '@ngrx/s
 import { EffectsModule, rootEffectsInit } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule, HttpClient, HttpHeaders, HttpRequest } from "@angular/common/http";
-import { Dexie } from "dexie";
+import  Dexie  from "dexie";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
