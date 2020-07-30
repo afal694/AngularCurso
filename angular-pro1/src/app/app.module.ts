@@ -28,6 +28,8 @@ import { VuelosMasInfoComponentComponent } from './components/vuelos/vuelos-mas-
 import { VuelosDetalleComponentComponent } from './components/vuelos/vuelos-detalle-component/vuelos-detalle-component.component';
 import { ReservasModule } from './reservas/reservas.module';
 import { DestinoViaje } from './models/destino-viaje.model';
+//import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+
 
 // app-config
 export interface AppConfig  {
@@ -53,7 +55,8 @@ export const childrenRoutesVuelos: Routes = [
 const routes: Routes = [
   { path: '', redirectTo: 'home' , pathMatch: 'full'},
   { path: 'home', component: ListaDestinosComponent},
-  { path: 'destino/:id', component: DestinoDetalleComponent},
+  //{ path: 'destino/:id', component: DestinoDetalleComponent},
+  { path: 'destino', component: DestinoDetalleComponent},
   { path: 'login', component: LoginComponent},
   {
     path: 'protected',
@@ -152,7 +155,10 @@ export const db = new MyDataBase();
     ReservasModule, 
     ReactiveFormsModule,
     FormsModule,
-    
+    // NgxMapboxGLModule.withConfig({
+    //   accessToken: 'pk.eyJ1IjoiYWZhbDMxNSIsImEiOiJja2Q4dXJiNTkwOGJwMnNzZ2s0bnlsOG5jIn0.vMjgGjurGNitTyhseFtjDg', // Optional, can also be set per map (accessToken input of mgl-map)
+    //   geocoderAccessToken: 'pk.eyJ1IjoiYWZhbDMxNSIsImEiOiJja2Q4dXJiNTkwOGJwMnNzZ2s0bnlsOG5jIn0.vMjgGjurGNitTyhseFtjDg' // Optional, specify if different from the map access token, can also be set per mgl-geocoder (accessToken input of mgl-geocoder)
+    // })
   ],
   providers: [
     AuthService, UsuarioLogueadoGuard,
