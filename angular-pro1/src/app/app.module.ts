@@ -29,6 +29,7 @@ import { VuelosMasInfoComponentComponent } from './components/vuelos/vuelos-mas-
 import { VuelosDetalleComponentComponent } from './components/vuelos/vuelos-detalle-component/vuelos-detalle-component.component';
 import { ReservasModule } from './reservas/reservas.module';
 import { DestinoViaje } from './models/destino-viaje.model';
+import { EspiameDirective } from './espiame.directive';
 
 
 // app-config
@@ -136,7 +137,8 @@ export const db = new MyDataBase();
     VuelosComponentComponent,
     VuelosMainComponentComponent,
     VuelosMasInfoComponentComponent,
-    VuelosDetalleComponentComponent   
+    VuelosDetalleComponentComponent,
+    EspiameDirective   
   ],
   imports: [
     BrowserModule,
