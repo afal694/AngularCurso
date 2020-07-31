@@ -30,6 +30,7 @@ import { VuelosDetalleComponentComponent } from './components/vuelos/vuelos-deta
 import { ReservasModule } from './reservas/reservas.module';
 import { DestinoViaje } from './models/destino-viaje.model';
 import { EspiameDirective } from './espiame.directive';
+import { TrackearClickDirective } from './trackear-click.directive';
 
 
 // app-config
@@ -138,7 +139,8 @@ export const db = new MyDataBase();
     VuelosMainComponentComponent,
     VuelosMasInfoComponentComponent,
     VuelosDetalleComponentComponent,
-    EspiameDirective   
+    EspiameDirective,
+    TrackearClickDirective   
   ],
   imports: [
     BrowserModule,
