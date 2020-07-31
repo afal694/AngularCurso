@@ -7,6 +7,7 @@ import { EffectsModule, rootEffectsInit } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule, HttpClient, HttpHeaders, HttpRequest } from "@angular/common/http";
 import  Dexie  from "dexie";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,7 +29,6 @@ import { VuelosMasInfoComponentComponent } from './components/vuelos/vuelos-mas-
 import { VuelosDetalleComponentComponent } from './components/vuelos/vuelos-detalle-component/vuelos-detalle-component.component';
 import { ReservasModule } from './reservas/reservas.module';
 import { DestinoViaje } from './models/destino-viaje.model';
-//import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 
 // app-config
@@ -155,10 +155,7 @@ export const db = new MyDataBase();
     ReservasModule, 
     ReactiveFormsModule,
     FormsModule,
-    // NgxMapboxGLModule.withConfig({
-    //   accessToken: 'pk.eyJ1IjoiYWZhbDMxNSIsImEiOiJja2Q4dXJiNTkwOGJwMnNzZ2s0bnlsOG5jIn0.vMjgGjurGNitTyhseFtjDg', // Optional, can also be set per map (accessToken input of mgl-map)
-    //   geocoderAccessToken: 'pk.eyJ1IjoiYWZhbDMxNSIsImEiOiJja2Q4dXJiNTkwOGJwMnNzZ2s0bnlsOG5jIn0.vMjgGjurGNitTyhseFtjDg' // Optional, specify if different from the map access token, can also be set per mgl-geocoder (accessToken input of mgl-geocoder)
-    // })
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService, UsuarioLogueadoGuard,
