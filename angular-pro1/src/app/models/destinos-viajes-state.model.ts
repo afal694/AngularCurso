@@ -69,7 +69,7 @@ export class InitMyDataAction implements Action {
 }
 
 export type DestinosViajeActions = NuevoDestinoAction | ElegidoFavoritoAction |
-VoteUpAction | VoteDownAction| EliminarDestinoAction | InitMyDataAction;
+VoteUpAction | VoteDownAction| EliminarDestinoAction | InitMyDataAction | ResetVotesAction;
 
 //Reducers
 export function ReducerDestinosViajes (
